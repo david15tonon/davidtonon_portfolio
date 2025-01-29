@@ -6,6 +6,7 @@
     <title>David TONON</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -229,6 +230,7 @@
                 <input type="submit" value="Send Message" class="btn">
               </div>
             </div>
+            <div class="g-recaptcha" data-sitekey="G3ozx5xtEqGAGi3VdsQGKGHxuwqSJDTn38vEUEREQweQ"></div>
           </form>
           
 
@@ -243,26 +245,18 @@ const btn = document.getElementById('button');
 // Ajouter un événement au formulaire
 document.getElementById('contact-form').addEventListener('submit', function(event) {
   event.preventDefault();  // Empêche l'envoi par défaut du formulaire
+  var recaptchaResponse = grecaptcha.getResponse();
+        if (recaptchaResponse.length === 0) {
+            alert("Please complete the reCAPTCHA");
+            return false;
+        }
 
-  // Modifier le texte du bouton pour indiquer que l'email est en train d'être envoyé
-  btn.value = 'Sending...';
-
-  // Identifiants de ton service et template EmailJS
-  const serviceID = 'default_service';  // Remplace par l'ID de ton service
-  const templateID = 'template_xxxx';   // Remplace par l'ID de ton modèle de template
-
-  // Envoie du formulaire via EmailJS
-  emailjs.sendForm(serviceID, templateID, this)
-    .then(() => {
-      // Si l'email est envoyé avec succès
-      btn.value = 'Send Message';
-      alert('Message sent successfully!');
-    }, (err) => {
-      // En cas d'erreur d'envoi
-      btn.value = 'Send Message';
-      alert('Oops! Something went wrong: ' + JSON.stringify(err));
+        // Ici, tu peux ajouter le code pour soumettre le formulaire
+        alert("reCAPTCHA validé !");
     });
-});
+
+  
+
 
             // Cibler le formulaire avec l'ID
             document.getElementById("contact-form").addEventListener("submit", function(event) {
