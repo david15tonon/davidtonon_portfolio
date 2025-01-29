@@ -218,11 +218,10 @@ span{
 
 /* Animation du contenu */
 @keyframes words {
-    0%, 20% { content: "UI/UX Designer"; }
-    20%, 40% { content: "Frontend Developer"; }
-    40%, 60% { content: "Backend Developer"; }
-    60%, 80% { content: "ML Engineer"; }
-    80%, 100% { content: "Meta ADS Manager"; }
+    0%, 30% { content: "UI/UX Designer"; }
+    30%, 50% { content: "Frontend Developer"; }
+    50%, 80% { content: "Backend Developer"; }
+    80%, 100% { content: "Data Scientist"; }
 }
 
 /* Animation de la frappe, maintien et effacement */
@@ -237,15 +236,11 @@ span{
     46.67%, 53.33% { width: calc(100% + 8px); } /* Maintien */
     53.33%, 60% { width: 0; } /* Effacement */
 
-    /* ML Engineer */
+    /* Data Scientist */
     60%, 66.67% { width: 0; } /* Frappe */
     66.67%, 73.33% { width: calc(100% + 8px); } /* Maintien */
     73.33%, 80% { width: 0; } /* Effacement */
 
-    /* Meta ADS Manager */
-    80%, 86.67% { width: 0; } /* Frappe */
-    86.67%, 93.33% { width: calc(100% + 8px); } /* Maintien */
-    93.33%, 100% { width: 0; } /* Effacement */
 }
 .heading{
     font-size: 8rem;
@@ -527,7 +522,7 @@ span{
     border-radius: 1rem;
     border: 2px solid var(--main-color);
     resize: none;
-    min-height: 8rem;
+    min-height: 21rem;
 }
 
 
