@@ -6,7 +6,7 @@
     <title>David TONON</title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcvH8cqAAAAAJ5F99Y7ZNuCiBsKSsKXNn3pjg1U"></script>
     <script
   type="text/javascript"
   src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
@@ -230,7 +230,14 @@
                 <input type="submit" value="Send Message" class="btn">
               </div>
             </div>
-            <div class="g-recaptcha" data-sitekey="6lcvH8cqAAAAAJ5F99Y7ZNuCiBsKSsKXNn3pjg1U"></div>
+            <div>
+                <button class="g-recaptcha"
+    data-sitekey="6LcvH8cqAAAAAJ5F99Y7ZNuCiBsKSsKXNn3pjg1U"
+    data-callback='onSubmit'
+    data-action='submit'>
+  Submit
+</button>
+            </div>
           </form>
           
 
