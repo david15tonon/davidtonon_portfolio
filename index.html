@@ -1,322 +1,638 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David TONON</title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <script src="https://www.google.com/recaptcha/enterprise.js?render=6LcvH8cqAAAAAJ5F99Y7ZNuCiBsKSsKXNn3pjg1U"></script>
-    <script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
-</script>
+    <title>David Tonon | AI Engineer Building Africa's Tech Future</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body{
+            font-family: 'Poppins', sans-serif;
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #f97316;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .active::after {
+            width: 100%;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        .dark-mode {
+            background-color: #0a192f;
+            color: #ccd6f6;
+        }
+        .light-mode {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+        .language-switch {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .language-switch:hover {
+            color: #f97316;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        .dark-mode {
+    background-color: #111;
+    color: #fff;
+}
+
+.light-mode {
+    background-color: #fff;
+    color: #111;
+}
+    </style>
 </head>
-<body>
-    <header class="header">
-        <a href="#home" class="logo">David 
-            <span>Tonon</span>
-            <i class="bx bx-menu" id="menu-icon"></i>
-        </a>
-        <nav class="navbar">
-            <a href="#home" class="active">Home</a>
-            <a href="#education">Education</a>
-            <a href="#services">Services</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
-    <section class="home" id="home">
-        <div class="home-content">
-            <h1>
-                Hi, It's <span>David</span>
-            </h1>
-            <h3 class="text-animation">
-                I'm a <span class="typing"></span>
-            </h3>
-            <p>
-                 
-            </p>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/in/david-deo-gracias-tonon-1ab4521b6/"><i class="bx bxl-linkedin"></i></a>
-                <a href="https://github.com/david15tonon"><i class="bx bxl-github"></i></a>
-                <a href="https://x.com/david15tonon"><i class="bx bxl-twitter"></i></a>
-                <a href=" https://instagram.com/david.tonon15/"><i class="bx bxl-instagram"></i></a>
-            </div>
-            <div class="btn-group">
-                <!-- Bouton Hire modifié pour envoyer un email -->
-                <a href="mailto:contact@davidtonon.com?subject=Hiring Inquiry&body=Hello David, I would like to discuss a potential project with you. Please find my details below:" class="btn">Hire</a>
-                
-                <a href="#contact" class="btn">Contact</a>
-            </div>
-            
-        </div>
-        <div class="home-img">
-            <img src="assets/images/image.jpg" alt="">
-        </div>
-    </section>
-    <section class="education" id="education">
-        <h2 class="heading">Education</h2>
-        <div class="timeline-items">
-            <div class="timeline-item">
-                <div class="timeline-dot" id="a"> </div>
-                    <div class="timeline-date" >2020
+<body class="transition-colors duration-300" >
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-[#0a192f]/90 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#home" class="text-2xl font-bold text-white">DT</a>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-white px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#about" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">About</a>
+                        <a href="#skills" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Skills</a>
+                        <a href="#projects" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Projects</a>
+                        <a href="#contact" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Contact</a>
+                        <div class="flex items-center space-x-4">
+                            <span id="language-en" class="language-switch text-white font-medium">EN</span>
+                            <span class="text-gray-400">|</span>
+                            <span id="language-fr" class="language-switch text-gray-400 font-medium">FR</span>
+                            <button id="theme-toggle" class="p-2 rounded-full focus:outline-none">
+                                <ion-icon name="moon" class="text-white text-xl"></ion-icon>
+                            </button>
+                        </div>
                     </div>
-                    <div class="timeline-content">
-                        <h3>Freecodecamp</h3>
-                        <p>
-                            I have earned two certifications from FreeCodeCamp: Scientific Computing with Python and Data Analysis with Python. Through these programs, I developed strong skills in Python programming, data manipulation, and algorithm development. I worked on projects involving numerical computing, automation, and data visualization, using libraries such as NumPy, Pandas, Matplotlib, and Scikit-learn. These certifications have strengthened my ability to analyze and interpret data, solve complex problems, and apply Python to real-world computational and analytical tasks.
-                        </p>
-                    </div>
-                
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                    <div class="timeline-date">2022
-                    </div>
-                    <div class="timeline-content">
-                        <h3>University</h3>
-                        <p>
-                            I am currently pursuing a Bachelor degree in Artificial Intelligence at the Training and Research  Institute in Computer Science (IFRI). My studies focus on machine learning, deep learning, with a strong foundation in mathematics and programming. Throughout my academic journey, I have worked on projects involving data science, computer vision, and embedded systems, applying AI techniques to solve real-world problems. My passion for innovation and technology drives me to continuously learn and explore new advancements in the field.    
-                        </p>
-                    </div>
-                
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot" id="b"></div>
-                    <div class="timeline-date" >2024
-                    </div>
-                    <div class="timeline-content">
-                        <h3>Internship at <a href="https://tekbot.io" style="color: white;">Tekbot Robotic</a></h3>
-                        <p>
-                            During my internship at Tekbot Robotics, I worked on developing and integrating robotic systems, focusing on ESP32, embedded sensors, and IoT communication protocols. I contributed to the design of electronic boards, optimized firmware for motor control, and improved obstacle detection algorithms using ultrasonic and LiDAR sensors. This experience enhanced my technical skills, problem-solving abilities, and teamwork, reinforcing my passion for robotics and AI.
-                        </p>
-                    </div>
-                
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                    <div class="timeline-date">2025
-                    </div>
-                    <div class="timeline-content">
-                        <h3>Frontend Dev at <a href="https://alitcha.tech" style="color: white;">Alitcha</a></h3>
-                        <p>
-                           As a ReactJS frontend developper my work as the developper member team was to develop
-                           the company website frontend both the client and the admin part. This was a great and 
-                           full 5 month challenge.
-                        </p>
-                    </div>
-                
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none">
+                        <ion-icon name="menu" class="text-2xl"></ion-icon>
+                    </button>
+                </div>
             </div>
         </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#0a192f] pb-4">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 text-base font-medium text-white">Home</a>
+                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">About</a>
+                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Skills</a>
+                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Projects</a>
+                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Contact</a>
+                <div class="flex items-center px-3 py-2 space-x-4">
+                    <span id="language-en-mobile" class="language-switch text-white font-medium">EN</span>
+                    <span class="text-gray-400">|</span>
+                    <span id="language-fr-mobile" class="language-switch text-gray-400 font-medium">FR</span>
+                    <button id="theme-toggle-mobile" class="p-2 rounded-full focus:outline-none">
+                        <ion-icon name="moon" class="text-white text-xl"></ion-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-    </section>
-    <section class="services" id="services">
-        <h2 class="heading">Services</h2>
-        <div class="services-container">
-            <div class="service-box">
-                <div class="service-info">
-                    <h4>UI/UX Design</h4>
-                    <p>
-                        I create intuitive and aesthetically pleasing user experiences, focusing on usability and interaction. My approach is based on a deep understanding of user needs and crafting designs that ensure smooth navigation. From wireframing to visual design, I ensure every product is both functional and enjoyable to use.    
-                    </p>
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="order-2 md:order-1">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                    <span class="text-orange-500">David</span> Tonon
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
+                    Building Africa through the power of technology
+                </h2>
+                <p class="text-lg text-gray-400 mb-8 max-w-lg">
+                    AI Engineer, Full-Stack Developer, and STEM enthusiast focused on innovation and entrepreneurship for Africa's tech transformation.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#projects" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition duration-300">
+                        View Projects
+                    </a>
+                    <a href="#contact" class="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-3 px-6 rounded-md transition duration-300">
+                        Contact Me
+                    </a>
                 </div>
             </div>
-            <div class="service-box">
-                <div class="service-info">
-                    <h4>Frontend Development</h4>
-                    <p>
-                        I bring designs to life by developing interactive and responsive websites using modern technologies such as HTML, CSS, JavaScript, and frameworks like React and Vue.js. I ensure that every site performs well, is mobile-friendly, and accessible, offering an optimal experience across all devices.
-                    </p>
-                </div>
-            </div>
-            <div class="service-box">
-                <div class="service-info">
-                    <h4>Backend Development</h4>
-                    <p>
-                        With expertise in backend development, I build robust, scalable systems using technologies like Django, Node.js, and both relational and non-relational databases (SQL, MongoDB). I ensure the server architecture is solid and secure to support high traffic and efficient data management.
-                    </p>
-                </div>
-            </div>
-            <div class="service-box">
-                <div class="service-info">
-                    <h4>Data Science</h4>
-                    <p>
-                        I leverage advanced data analysis techniques to extract valuable insights and support strategic decision-making. Using tools like Python, R, and machine learning libraries, I build predictive models, analyze trends, and create data visualizations to deliver actionable, real-world results. 
-                    </p>
+            <div class="order-1 md:order-2 flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-orange-500 floating">
+                    <img src="profile.jpg" 
+                         alt="David Tonon" 
+                         class="w-full h-full object-cover">
                 </div>
             </div>
         </div>
     </section>
-    <section class="testimonials"  id="testimonials">
-        <div class="testimonials-box">
-            <h2 class="heading">Testimonials</h2>
-            <div class="wrapper">
-                <div class="testimonial-item">
-                    <img class="ethan" src="assets/images/1.jpeg" alt="image1 ">
-                    <h2>Ethan Jones</h2>
-                    <div class="rating">
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                    </div>
-                    <p>
-                        Working with David has been an amazing experience. His expertise and professional approach allowed me to achieve my goals quickly and efficiently. I'm truly impressed by the quality of service and attention to detail. David really knows how to understand his clients' needs and deliver tailored solutions. I highly recommend his services!   
-                    </p>
-                </div>
-                <div class="testimonial-item">
-                    <img src="assets/images/2.jpeg" alt="image1">
-                    <h2>Maryline</h2>
-                    <div class="rating">
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                    </div>
-                    <p>
-                        I am absolutely thrilled with the services provided by David. The team was incredibly responsive and attentive to my requests. Thanks to their professionalism, I was able to achieve results beyond my expectations. Their ability to anticipate my needs and offer tailored solutions really impressed me. I wholeheartedly recommend David's services to anyone looking for high-quality work!  
-                    </p>
-                </div>
-                <div class="testimonial-item">
-                    <img src="assets/images/3.jpeg" alt="image1">
-                    <h2>Helena</h2>
-                    <div class="rating">
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                        <i class="bx bxs-star"
-                        id="star"></i>
-                    </div>
-                    <p>
-                        I've been working with David for some time now, and I couldn't be more satisfied. His innovative approach and responsiveness to challenges have made all the difference in my project. He provided creative solutions that perfectly aligned with my expectations. I highly recommend David's services to anyone looking for a reliable and skilled partner.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="contact" id="contact">
-        <h2 class="heading" >Contact <span>Me</span>
 
-        </h2>
-         <!-- Formulaire avec un ID et des attributs 'name' pour EmailJS -->
-         <form id="contact-form">
-            <div class="input-group">
-              <div class="input-box">
-                <input type="text" name="full_name" placeholder="Full Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="number" name="phone_number" placeholder="Phone Number" required>
-                <input type="text" name="subject" placeholder="Subject" required>
-              </div>
-              <div class="input-group-2">
-                <textarea name="message" placeholder="Send Message" required></textarea>
-                <input type="submit" value="Send Message" class="btn">
-              </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                <span class="text-orange-500">About</span> Me
+            </h2>
+            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="flex justify-center">
+                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden border-2 border-orange-500">
+                    <img src="profile.jpg" alt="David Tonon" class="w-full h-full object-cover">
+                </div>
             </div>
             <div>
-                <button class="g-recaptcha"
-    data-sitekey="6LcvH8cqAAAAAJ5F99Y7ZNuCiBsKSsKXNn3pjg1U"
-    data-callback='onSubmit'
-    data-action='submit'>
-  Submit
-</button>
+                <h3 class="text-2xl font-semibold text-white mb-4">Biography</h3>
+                <p class="text-gray-400 mb-6">
+                    A passionate AI engineer, entrepreneur, and STEM student based in Benin. Dedicated to developing innovative tech solutions by combining AI, full-stack development, and UX/UI design.
+                </p>
+                <h3 class="text-2xl font-semibold text-white mb-4">Mission Statement</h3>
+                <p class="text-gray-400 mb-6">
+                    Committed to creating a thriving innovation hub in Africa by merging technology with vision. My goal is to build a tech ecosystem that surpasses Silicon Valley right here on the African continent.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="David_Tonon_CV.pdf" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 flex items-center">
+                        <ion-icon name="document-text-outline" class="mr-2"></ion-icon>
+                        Download CV
+                    </a>
+                </div>
             </div>
-          </form>
-          
+        </div>
+    </section>
 
-        <script type="text/javascript">
-            // Initialiser EmailJS avec ta clé publique
-            // Initialiser EmailJS avec ta clé publique
-emailjs.init('42lH3t1wCiMheuUQB');  // Remplace par ta clé publique
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-[#112240] rounded-lg">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                My <span class="text-orange-500">Skills</span>
+            </h2>
+            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Programming Languages -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="code-slash-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">Programming</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Python
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        JavaScript
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        C/C++
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        PHP
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Web Development -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="globe-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">Web Dev</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        HTML5/CSS3
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        React
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Django
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        FastAPI
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- AI/ML -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="hardware-chip-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">AI/ML</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Machine Learning
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Deep Learning
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        TensorFlow/PyTorch
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Computer Vision
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Databases -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="server-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">Databases</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        MongoDB
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        PostgreSQL
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        MySQL
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Firebase
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Tools -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="hammer-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">Tools</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Git/GitHub
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        VS Code
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Docker
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Jupyter
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- UX/UI -->
+            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
+                <div class="flex items-center mb-4">
+                    <ion-icon name="color-palette-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
+                    <h3 class="text-xl font-semibold text-white">UX/UI Design</h3>
+                </div>
+                <ul class="space-y-2">
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Figma
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Adobe XD
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        User Research
+                    </li>
+                    <li class="flex items-center text-gray-400">
+                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
+                        Prototyping
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-// Récupérer le bouton d'envoi
-const btn = document.getElementById('button');
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                My <span class="text-orange-500">Projects</span>
+            </h2>
+            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="mental.png" 
+                         alt="AI-Powered Healthcare Platform" 
+                         class="w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
+                        <div class="text-center p-4">
+                            <a href="https://mind-care-seven.vercel.app/" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
+                                View Project
+                            </a>
+                            <a href="https://github.com/david15tonon/MindCare/tree/main" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">AI-Powered Healthcare Platform</h3>
+                    <p class="text-gray-400 mb-4">
+                        MindCare is a mental health assistant
+It offers 24/7 emotional support using compassionate AI to listen and guide users.
+Designed to provide a safe, calming space for mental wellness.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Ollama</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">FastAPI</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+                         alt="AgriTech Solution for African Farmers" 
+                         class="w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
+                        <div class="text-center p-4">
+                            <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
+                                View Project
+                            </a>
+                            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">AgriTech Solution for African Farmers</h3>
+                    <p class="text-gray-400 mb-4">
+                        Mobile app that uses AI to predict crop yields and suggest optimal planting times based on weather data.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">React Native</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Django</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">MongoDB</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
+                <div class="relative h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
+                         alt="African Language Translation API" 
+                         class="w-full h-full object-cover">
+                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
+                        <div class="text-center p-4">
+                            <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
+                                View Project
+                            </a>
+                            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
+                                GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-semibold text-white mb-2">African Language Translation API</h3>
+                    <p class="text-gray-400 mb-4">
+                        NLP service that translates between English and several African languages with high accuracy.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">PyTorch</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">FastAPI</span>
+                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Docker</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-12">
+            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-3 px-6 rounded-md transition duration-300">
+                View All Projects
+            </a>
+        </div>
+    </section>
 
-// Ajouter un événement au formulaire
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-  event.preventDefault();  // Empêche l'envoi par défaut du formulaire
-  var recaptchaResponse = grecaptcha.getResponse();
-        if (recaptchaResponse.length === 0) {
-            alert("Please complete the reCAPTCHA");
-            return false;
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-[#112240] rounded-lg">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                Get In <span class="text-orange-500">Touch</span>
+            </h2>
+            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-2xl font-semibold text-white mb-6">Contact Information</h3>
+                <p class="text-gray-400 mb-8">
+                    Interested in collaborating or learning more about my work? Feel free to reach out through any of the channels below.
+                </p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <ion-icon name="mail-outline" class="text-orange-500 text-xl mr-4 mt-1"></ion-icon>
+                        <div>
+                            <h4 class="text-white font-medium">Email</h4>
+                            <a href="mailto:david@tonon.dev" class="text-gray-400 hover:text-orange-500 transition duration-300">david@tonon.dev</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <ion-icon name="location-outline" class="text-orange-500 text-xl mr-4 mt-1"></ion-icon>
+                        <div>
+                            <h4 class="text-white font-medium">Location</h4>
+                            <p class="text-gray-400">Benin, West Africa</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center space-x-6 mt-8">
+                        <a href="https://github.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                            <ion-icon name="logo-github" class="text-2xl"></ion-icon>
+                        </a>
+                        <a href="https://www.linkedin.com/in/d%C3%A9o-gracias-david-tonon-1ab4521b6/" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                            <ion-icon name="logo-linkedin" class="text-2xl"></ion-icon>
+                        </a>
+                        <a href="https://x.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                            <ion-icon name="logo-twitter" class="text-2xl"></ion-icon>
+                        </a>
+                        <a href="https://www.instagram.com/david.tonon15/" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                            <ion-icon name="logo-instagram" class="text-2xl"></ion-icon>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <form class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-white font-medium mb-2">Your Name</label>
+                        <input type="text" id="name" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="John Doe">
+                    </div>
+                    
+                    <div>
+                        <label for="email" class="block text-white font-medium mb-2">Your Email</label>
+                        <input type="email" id="email" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="john@example.com">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-white font-medium mb-2">Your Message</label>
+                        <textarea id="message" rows="5" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="Hello David..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition duration-300">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col items-center justify-center">
+            <a href="#home" class="text-2xl font-bold text-white mb-6">DT</a>
+            
+            <div class="flex space-x-6 mb-6">
+                <a href="https://github.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                    <ion-icon name="logo-github" class="text-xl"></ion-icon>
+                </a>
+                <a href="https://www.linkedin.com/in/d%C3%A9o-gracias-david-tonon-1ab4521b6/" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                    <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
+                </a>
+                <a href="https://x.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                    <ion-icon name="logo-twitter" class="text-xl"></ion-icon>
+                </a>
+                <a href="https://www.instagram.com/david.tonon15/" class="text-gray-400 hover:text-orange-500 transition duration-300">
+                    <ion-icon name="logo-instagram" class="text-xl"></ion-icon>
+                </a>
+            </div>
+            
+            <p class="text-gray-400 text-center">
+                © 2023 David Tonon. All rights reserved.
+                <br>
+                Building Africa through the power of technology.
+            </p>
+        </div>
+    </footer>
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton?.addEventListener('click', () => {
+            mobileMenu?.classList.toggle('hidden');
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const html = document.documentElement;
+
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme') || 
+                              (prefersDarkScheme.matches ? 'dark' : 'light');
+            if (savedTheme === 'light') {
+                html.classList.remove('dark-mode');
+                html.classList.add('light-mode');
+                updateThemeIcons('light');
+            } else {
+                html.classList.remove('light-mode');
+                html.classList.add('dark-mode');
+                updateThemeIcons('dark');
+            }
         }
 
-        // Ici, tu peux ajouter le code pour soumettre le formulaire
-        alert("reCAPTCHA validé !");
-    });
+        function updateThemeIcons(theme) {
+            const themeIcon = themeToggle?.querySelector('ion-icon');
+            const themeIconMobile = themeToggleMobile?.querySelector('ion-icon');
+            if (theme === 'dark') {
+                themeIcon?.setAttribute('name', 'sunny');
+                themeIconMobile?.setAttribute('name', 'sunny');
+            } else {
+                themeIcon?.setAttribute('name', 'moon');
+                themeIconMobile?.setAttribute('name', 'moon');
+            }
+        }
 
-  
+        function toggleTheme() {
+            if (html.classList.contains('dark-mode')) {
+                html.classList.remove('dark-mode');
+                html.classList.add('light-mode');
+                localStorage.setItem('theme', 'light');
+                updateThemeIcons('light');
+            } else {
+                html.classList.remove('light-mode');
+                html.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                updateThemeIcons('dark');
+            }
+        }
 
+        themeToggle?.addEventListener('click', toggleTheme);
+        themeToggleMobile?.addEventListener('click', toggleTheme);
 
-            // Cibler le formulaire avec l'ID
-            document.getElementById("contact-form").addEventListener("submit", function(event) {
-                event.preventDefault(); // Empêcher l'envoi par défaut du formulaire
-
-                // Récupérer les données du formulaire
-                const form = event.target;
-
-                // Envoie le formulaire via EmailJS
-                emailjs.sendForm('service_3t397c2', 'template_q4oihru', this)
-    .then(function(response) {
-        console.log('SUCCESS!', response);
-        alert("Message sent successfully!");
-    }, function(error) {
-        console.log('FAILED...', error);
-        console.error('Error details:', error);  // Affiche l'erreur détaillée
-        alert("Oops! Something went wrong.");
-    });
-
-            });
-        </script>            
-        <footer class="footer">
-        
-            <div class="social">
-                
-                <a href="https://www.linkedin.com/in/david-deo-gracias-tonon-1ab4521b6/"><i class="bx bxl-linkedin"></i></a>
-                <a href="https://github.com/david15tonon"><i class="bx bxl-github"></i></a>
-                <a href="https://x.com/david15tonon"><i class="bx bxl-twitter"></i></a>
-                <a href="https://instagram.com/david.tonon15/"><i class="bx bxl-instagram"></i></a>
-            </div>
-            <ul class="list">
-                <li> 
-                    <a href="#">FAQ</a>
-                </li>
-                <li> 
-                    <a href="#services">Services</a>
-                </li>
-                <li> 
-                    <a href="#home">About Me</a>
-                </li>
-                <li> 
-                    <a href="#contact">Contact</a>
-                </li>
-                <li> 
-                    <a href="#testimonials">Testimonials</a>
-                </li>
-            </ul>
-            <p class="copyright">
-                &copy; David TONON | All Rights Reserved
-            </p>
-        </footer>
-
-    </section>
-    <script src="script.js"></script>
+        initTheme();
+    </script>
 </body>
 </html>
