@@ -1,0 +1,16 @@
+/* 🌞 Style clair */
+[data-theme="light"] {
+	--bg-color: #ececec;
+	--text-color: #212121;
+}
+
+/* 🌚 Style sombre */
+[data-theme="dark"] {
+	--bg-color: #212121;
+	--text-color: #ececec;
+}
+
+html {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+}
