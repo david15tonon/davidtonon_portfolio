@@ -59,15 +59,7 @@
         .floating {
             animation: float 6s ease-in-out infinite;
         }
-        .dark-mode {
-    background-color: #111;
-    color: #fff;
-}
-
-.light-mode {
-    background-color: #fff;
-    color: #111;
-}
+    
     </style>
 </head>
 <body class="transition-colors duration-300" >
@@ -114,7 +106,7 @@
                     <span id="language-en-mobile" class="language-switch text-white font-medium">EN</span>
                     <span class="text-gray-400">|</span>
                     <span id="language-fr-mobile" class="language-switch text-gray-400 font-medium">FR</span>
-                    <button id="theme-toggle-mobile" class="p-2 rounded-full focus:outline-none">
+                    <button data-theme-toggler class="p-2 rounded-full focus:outline-none">
                         <ion-icon name="moon" class="text-white text-xl"></ion-icon>
                     </button>
                 </div>
@@ -609,23 +601,6 @@ Designed to provide a safe, calming space for mental wellness.
                 themeIconMobile?.setAttribute('name', 'moon');
             }
         }
-
-        function toggleTheme() {
-            if (html.classList.contains('dark-mode')) {
-                html.classList.remove('dark-mode');
-                html.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-                updateThemeIcons('light');
-            } else {
-                html.classList.remove('light-mode');
-                html.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                updateThemeIcons('dark');
-            }
-        }
-
-        themeToggle?.addEventListener('click', toggleTheme);
-        themeToggleMobile?.addEventListener('click', toggleTheme);
 
         initTheme();
     </script>
