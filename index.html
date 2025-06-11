@@ -78,9 +78,6 @@
                         <a href="#projects" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Projects</a>
                         <a href="#contact" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Contact</a>
                         <div class="flex items-center space-x-4">
-                            <span id="language-en" class="language-switch text-white font-medium">EN</span>
-                            <span class="text-gray-400">|</span>
-                            <span id="language-fr" class="language-switch text-gray-400 font-medium">FR</span>
                             <button data-theme-toggler id="theme-toggle" class="p-2 rounded-full focus:outline-none">
                                 <ion-icon name="moon" class="text-white text-xl"></ion-icon>
                             </button>
@@ -563,33 +560,12 @@ Designed to provide a safe, calming space for mental wellness.
         </div>
     </footer>
     <script>
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton?.addEventListener('click', () => {
-            mobileMenu?.classList.toggle('hidden');
         });
 
         const themeToggle = document.getElementById('theme-toggle');
         const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const html = document.documentElement;
 
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-
-        function initTheme() {
-            const savedTheme = localStorage.getItem('theme') || 
-                              (prefersDarkScheme.matches ? 'dark' : 'light');
-            if (savedTheme === 'light') {
-                html.classList.remove('dark-mode');
-                html.classList.add('light-mode');
-                updateThemeIcons('light');
-            } else {
-                html.classList.remove('light-mode');
-                html.classList.add('dark-mode');
-                updateThemeIcons('dark');
-            }
-        }
-
+        
         function updateThemeIcons(theme) {
             const themeIcon = themeToggle?.querySelector('ion-icon');
             const themeIconMobile = themeToggleMobile?.querySelector('ion-icon');
@@ -601,8 +577,6 @@ Designed to provide a safe, calming space for mental wellness.
                 themeIconMobile?.setAttribute('name', 'moon');
             }
         }
-
-        initTheme();
     </script>
 </body>
 </html>
