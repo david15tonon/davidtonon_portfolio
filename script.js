@@ -1,3 +1,9 @@
+const cursor = document.getElementById('cursor');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.transform = `translate(${e.clientX -10}px, ${e.clientY -10}px)`;
+});
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
