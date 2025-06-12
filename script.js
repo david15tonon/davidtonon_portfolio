@@ -9,6 +9,9 @@ const trailColor = "0,255,255"; //RGB values for cyan color
 const trail = [];
 
 function draw() {
+  
+  // Efface complètement le canvas à chaque frame (sans fond)
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = "rgba(0,0,0,0.1)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   for (let i = 0; i < trail.length; i++) {
