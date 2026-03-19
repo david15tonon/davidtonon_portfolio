@@ -1,584 +1,1312 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>David Tonon | AI Engineer Building Africa's Tech Future</title>
+    <title>David Tonon | The Digital Architect</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="dark-mode.js"></script>
-    <link rel="stylesheet" href="dark-mode.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body{
-            font-family: 'Poppins', sans-serif;
-            background-color: #0a192f;
-            color: #ccd6f6;
+        * {
             margin: 0;
-            }
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-         section,footer{
-                 pointer:grab;
-         }
-
-    
-        .nav-link {
-            position: relative;
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0e0e0e;
+            color: #c6c6c7;
+            overflow-x: hidden;
+            transition: background-color 0.35s ease, color 0.35s ease;
         }
-        .nav-link::after {
+        
+        /* Noise texture */
+        body::before {
             content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -2px;
+            position: fixed;
+            top: 0;
             left: 0;
-            background-color: #f97316;
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
             width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" seed="2"/><feColorMatrix type="saturate" values="0"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.02"/></svg>');
+            pointer-events: none;
+            z-index: -1;
         }
-        .active::after {
-            width: 100%;
+        
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1;
+            color: #ffffff;
         }
-        .project-card:hover .project-overlay {
+        
+        h2 {
+            font-size: 2rem;
+            line-height: 1.2;
+            color: #ffffff;
+        }
+        
+        h3 {
+            font-size: 1.25rem;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+        
+        .label-sm {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #81ecff;
+        }
+        
+        .body-lg {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        
+        /* Color utilities */
+        .text-secondary {
+            color: #00fc40;
+        }
+        
+        .text-tertiary {
+            color: #81ecff;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: #00fc40;
+            color: #0e0e0e;
+        }
+        
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(0, 252, 64, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            color: #00fc40;
+            background: transparent;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .btn-secondary:hover {
+            padding-left: 0.5rem;
+        }
+        
+        .btn-secondary::before {
+            content: '>';
+            margin-right: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        
+        .btn-secondary:hover::before {
             opacity: 1;
         }
         
-        .language-switch {
+        /* Section label */
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #81ecff;
+            margin-bottom: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .section-label:first-child {
+            margin-top: 0;
+        }
+        
+        /* Cards */
+        .card {
+            background-color: transparent;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .card:hover {
+            background-color: rgba(198, 198, 199, 0.03);
+            box-shadow: 0 0 40px rgba(129, 236, 255, 0.1);
+        }
+        
+        .card-title {
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .card-meta {
+            color: #81ecff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Tech chips */
+        .chip {
+            display: inline-block;
+            background-color: rgba(198, 198, 199, 0.08);
+            color: #c6c6c7;
+            padding: 0.35rem 0.75rem;
+            border-radius: 0;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(198, 198, 199, 0.15);
+        }
+        
+        /* Grid & Layout */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* Spacing */
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mt-8 { margin-top: 2rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        
+        /* Container */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Asymmetry */
+        .asymmetric {
+            margin-left: 4%;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .asymmetric {
+                margin-left: 0;
+            }
+        }
+
+        /* ANIMATIONS & EFFECTS */
+        
+        /* Backdrop blur */
+        .blur-glass {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background: rgba(14, 14, 14, 0.7);
+        }
+        
+        /* Dynamic gradient backgrounds */
+        .gradient-hero {
+            background: linear-gradient(135deg, 
+                rgba(0, 252, 64, 0.05) 0%,
+                rgba(14, 14, 14, 0) 50%,
+                rgba(129, 236, 255, 0.03) 100%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% {
+                background: linear-gradient(135deg, 
+                    rgba(0, 252, 64, 0.05) 0%,
+                    rgba(14, 14, 14, 0) 50%,
+                    rgba(129, 236, 255, 0.03) 100%);
+            }
+            50% {
+                background: linear-gradient(225deg, 
+                    rgba(129, 236, 255, 0.05) 0%,
+                    rgba(14, 14, 14, 0) 50%,
+                    rgba(0, 252, 64, 0.03) 100%);
+            }
+        }
+        
+        /* Soft shadows */
+        .shadow-soft {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+                        0 0 60px rgba(129, 236, 255, 0.05);
+        }
+        
+        .shadow-glow {
+            box-shadow: 0 0 80px rgba(0, 252, 64, 0.15),
+                        0 0 40px rgba(0, 252, 64, 0.08);
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+        }
+        
+        .slide-up {
+            transform: translateY(30px);
+            opacity: 0;
+        }
+        
+        .reveal {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reveal::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 252, 64, 0.1);
+            animation: revealText 0.6s ease-out forwards;
+        }
+        
+        @keyframes revealText {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(100%);
+            }
+        }
+        
+        /* Glow animation */
+        @keyframes glowPulse {
+            0%, 100% {
+                box-shadow: 0 0 30px rgba(0, 252, 64, 0.3),
+                            0 0 60px rgba(0, 252, 64, 0.1);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(0, 252, 64, 0.5),
+                            0 0 80px rgba(0, 252, 64, 0.2);
+            }
+        }
+        
+        .glow-animate {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        
+        /* Parallax container */
+        .parallax-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Card depth effect */
+        .card-depth {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        
+        .card-depth:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 252, 64, 0.15),
+                        0 0 80px rgba(129, 236, 255, 0.1);
+        }
+        
+        /* Navigation links */
+        nav a {
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #00fc40;
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #00fc40;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            width: 2.25rem;
+            height: 2.25rem;
+            border: 1px solid rgba(198, 198, 199, 0.2);
+            background: rgba(198, 198, 199, 0.06);
+            color: #c6c6c7;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .theme-toggle .theme-icon {
+            width: 1rem;
+            height: 1rem;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            transition: transform 0.25s ease;
+        }
+
+        .theme-toggle .theme-icon-sun {
+            display: none;
+        }
+
+        body.light-mode .theme-toggle .theme-icon-sun {
+            display: block;
+        }
+
+        body.light-mode .theme-toggle .theme-icon-moon {
+            display: none;
+        }
+
+        .theme-toggle:hover {
+            color: #00fc40;
+            border-color: rgba(0, 252, 64, 0.5);
+            box-shadow: 0 0 18px rgba(0, 252, 64, 0.18);
+        }
+
+        .theme-toggle:hover .theme-icon {
+            transform: scale(1.08);
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 2px solid rgba(0, 252, 64, 0.6);
+            outline-offset: 2px;
+        }
+
+        /* Language toggle */
+        .lang-toggle {
+            min-width: 2.35rem;
+            height: 2.25rem;
+            border: 1px solid rgba(198, 198, 199, 0.2);
+            background: rgba(198, 198, 199, 0.06);
+            color: #c6c6c7;
+            padding: 0 0.55rem;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-toggle:hover {
+            color: #00fc40;
+            border-color: rgba(0, 252, 64, 0.5);
+            box-shadow: 0 0 18px rgba(0, 252, 64, 0.18);
+        }
+
+        .lang-toggle:focus-visible {
+            outline: 2px solid rgba(0, 252, 64, 0.6);
+            outline-offset: 2px;
+        }
+        
+        /* Logo DT */
+        .logo-dt {
+            font-weight: 700;
+            letter-spacing: -0.02em;
             transition: all 0.3s ease;
         }
-        .language-switch:hover {
-            color: #f97316;
+        
+        .logo-dt:hover {
+            color: #00fc40;
+            text-shadow: 0 0 20px rgba(0, 252, 64, 0.4);
         }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        .floating {
-            animation: float 6s ease-in-out infinite;
-        }
-        nav, section, footer {
-            position: relative;
-            z-index: 1;
+        
+        .logo-letter {
+            display: inline-block;
         }
 
-        #cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #00ffff; /* Neon color */
-  border-radius: 50%;
-  pointer-events: none; /* Prevent the cursor from interfering with interactions */
-  box-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff; /* Neon glow */
-  transition: transform 0.1s ease; /* Smooth movement */
-  z-index: 1000;
-}
-    
+        /* Trusted by marquee */
+        .trusted-marquee {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(198, 198, 199, 0.08);
+            padding: 1rem 0;
+        }
+
+        .trusted-marquee::before,
+        .trusted-marquee::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 90px;
+            height: 100%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .trusted-marquee::before {
+            left: 0;
+            background: linear-gradient(to right, #0e0e0e 15%, rgba(14, 14, 14, 0));
+        }
+
+        .trusted-marquee::after {
+            right: 0;
+            background: linear-gradient(to left, #0e0e0e 15%, rgba(14, 14, 14, 0));
+        }
+
+        .trusted-track {
+            display: flex;
+            align-items: center;
+            width: max-content;
+            animation: trustedScroll 24s linear infinite;
+        }
+
+        .trusted-marquee:hover .trusted-track {
+            animation-play-state: paused;
+        }
+
+        .trusted-logo {
+            display: inline-flex;
+            align-items: center;
+            color: #8f8f8f;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            margin-right: 2.5rem;
+            opacity: 0.9;
+            filter: grayscale(100%);
+            white-space: nowrap;
+            text-decoration: none;
+            transition: color 0.25s ease, opacity 0.25s ease;
+        }
+
+        .trusted-logo::before {
+            content: '■';
+            color: #6f6f6f;
+            margin-right: 0.6rem;
+            font-size: 0.6rem;
+        }
+
+        .trusted-logo:hover {
+            color: #c6c6c7;
+            opacity: 1;
+        }
+
+        .trusted-logo:focus-visible {
+            outline: 1px solid rgba(129, 236, 255, 0.5);
+            outline-offset: 0.2rem;
+            color: #c6c6c7;
+        }
+
+        @keyframes trustedScroll {
+            from {
+                transform: translateX(0);
+            }
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Light theme */
+        body.light-mode {
+            background-color: #f3f5f7;
+            color: #1f2630;
+        }
+
+        body.light-mode::before {
+            opacity: 0.45;
+            mix-blend-mode: multiply;
+        }
+
+        body.light-mode h1,
+        body.light-mode h2,
+        body.light-mode h3,
+        body.light-mode .card-title {
+            color: #111823;
+        }
+
+        body.light-mode .label-sm,
+        body.light-mode .card-meta {
+            color: #2f8ba0;
+        }
+
+        body.light-mode nav a {
+            color: #1f2630 !important;
+        }
+
+        body.light-mode nav a:hover {
+            color: #0c9442 !important;
+        }
+
+        body.light-mode .theme-toggle {
+            border-color: rgba(24, 32, 42, 0.22);
+            background: rgba(24, 32, 42, 0.06);
+            color: #1f2630;
+        }
+
+        body.light-mode .theme-toggle:hover {
+            color: #0c9442;
+            border-color: rgba(12, 148, 66, 0.45);
+            box-shadow: 0 0 18px rgba(12, 148, 66, 0.15);
+        }
+
+        body.light-mode .lang-toggle {
+            border-color: rgba(24, 32, 42, 0.22);
+            background: rgba(24, 32, 42, 0.06);
+            color: #1f2630;
+        }
+
+        body.light-mode .lang-toggle:hover {
+            color: #0c9442;
+            border-color: rgba(12, 148, 66, 0.45);
+            box-shadow: 0 0 18px rgba(12, 148, 66, 0.15);
+        }
+
+        body.light-mode header,
+        body.light-mode .trusted-section,
+        body.light-mode .founder-section,
+        body.light-mode section[style*="border-top"],
+        body.light-mode footer {
+            border-color: rgba(24, 32, 42, 0.12) !important;
+        }
+
+        body.light-mode .btn-primary {
+            background-color: #111823;
+            color: #f4f6f8;
+        }
+
+        body.light-mode .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(17, 24, 35, 0.2);
+        }
+
+        body.light-mode .btn-secondary {
+            color: #0c9442;
+        }
+
+        body.light-mode .card:hover {
+            background-color: rgba(23, 31, 42, 0.04);
+            box-shadow: 0 0 30px rgba(47, 139, 160, 0.15);
+        }
+
+        body.light-mode .chip {
+            background-color: rgba(17, 24, 35, 0.06);
+            color: #253040;
+            border-color: rgba(17, 24, 35, 0.14);
+        }
+
+        body.light-mode .blur-glass {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.68);
+        }
+
+        body.light-mode .gradient-hero {
+            background: linear-gradient(135deg,
+                rgba(12, 148, 66, 0.08) 0%,
+                rgba(243, 245, 247, 0) 52%,
+                rgba(47, 139, 160, 0.08) 100%);
+            animation: gradientShiftLight 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShiftLight {
+            0%, 100% {
+                background: linear-gradient(135deg,
+                    rgba(12, 148, 66, 0.08) 0%,
+                    rgba(243, 245, 247, 0) 52%,
+                    rgba(47, 139, 160, 0.08) 100%);
+            }
+            50% {
+                background: linear-gradient(225deg,
+                    rgba(47, 139, 160, 0.1) 0%,
+                    rgba(243, 245, 247, 0) 52%,
+                    rgba(12, 148, 66, 0.08) 100%);
+            }
+        }
+
+        body.light-mode .trusted-marquee {
+            border-color: rgba(24, 32, 42, 0.12);
+        }
+
+        body.light-mode .trusted-marquee::before {
+            background: linear-gradient(to right, #f3f5f7 15%, rgba(243, 245, 247, 0));
+        }
+
+        body.light-mode .trusted-marquee::after {
+            background: linear-gradient(to left, #f3f5f7 15%, rgba(243, 245, 247, 0));
+        }
+
+        body.light-mode .trusted-logo {
+            color: #5b6470;
+        }
+
+        body.light-mode .trusted-logo::before {
+            color: #6c7684;
+        }
+
+        body.light-mode .trusted-logo:hover {
+            color: #222d3a;
+        }
+
+        body.light-mode .trusted-logo:focus-visible {
+            outline-color: rgba(47, 139, 160, 0.45);
+            color: #222d3a;
+        }
+
+        body.light-mode [style*="color: #a0a0a0"] {
+            color: #55606d !important;
+        }
+
+        body.light-mode [style*="color: #c6c6c7"] {
+            color: #2a3440 !important;
+        }
+
+        body.light-mode [style*="color: #808080"] {
+            color: #5a6472 !important;
+        }
+
+        body.light-mode [style*="color: #00fc40"] {
+            color: #0c9442 !important;
+        }
+        
+        /* Large spacing utilities */
+        .px-gap { padding: 0 3rem; }
+        .py-gap { padding: 3rem 0; }
+        .py-xlarge { padding: 6rem 0; }
+        
+        @media (max-width: 768px) {
+            .px-gap { padding: 0 1.5rem; }
+            .py-gap { padding: 2rem 0; }
+            .py-xlarge { padding: 3rem 0; }
+        }
     </style>
 </head>
-<body class="transition-colors duration-300" >
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-[#0a192f]/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#home" class="text-2xl font-bold text-white">DT</a>
-                </div>
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="nav-link text-white px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="#about" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">About</a>
-                        <a href="#skills" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Skills</a>
-                        <a href="#projects" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Projects</a>
-                        <a href="#contact" class="nav-link text-gray-300 hover:text-white px-3 py-2 text-sm font-medium">Contact</a>
-                        <div class="flex items-center space-x-4">
-                            <button data-theme-toggler id="theme-toggle" class="p-2 rounded-full focus:outline-none"></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-white focus:outline-none"></button>
-                </div>
-            </div>
-        </div>
-        <div id="cursor"></div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-[#0a192f] pb-4">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#home" class="block px-3 py-2 text-base font-medium text-white">Home</a>
-                <a href="#about" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">About</a>
-                <a href="#skills" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Skills</a>
-                <a href="#projects" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Projects</a>
-                <a href="#contact" class="block px-3 py-2 text-base font-medium text-gray-300 hover:text-white">Contact</a>
-                <div class="flex items-center px-3 py-2 space-x-4">
-                    <button data-theme-toggler class="p-2 rounded-full focus:outline-none">
-                        <ion-icon name="moon" class="text-white text-xl"></ion-icon>
+<body>
+    <!-- Header/Nav -->
+    <header style="padding: 2rem 0; border-bottom: 1px solid rgba(198, 198, 199, 0.1);">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 class="logo-dt" style="margin: 0; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; position: relative;"><span class="logo-letter" style="opacity: 0;">D</span><span class="logo-letter" style="opacity: 0;">T</span></h3>
+                <nav style="display: flex; gap: 2rem; align-items: center;">
+                    <a href="#about" style="text-decoration: none; color: #c6c6c7; font-weight: 500; transition: color 0.3s;" data-i18n="nav_about">ABOUT</a>
+                    <a href="#projects" style="text-decoration: none; color: #c6c6c7; font-weight: 500; transition: color 0.3s;" data-i18n="nav_projects">PROJECTS</a>
+                    <button type="button" class="lang-toggle" aria-label="Switch to French" title="Switch to French">FR</button>
+                    <button type="button" class="theme-toggle" aria-label="Switch to light mode" title="Switch to light mode">
+                        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M15 12a6.5 6.5 0 1 1-7-7 5.5 5.5 0 1 0 7 7z"></path>
+                        </svg>
+                        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="12" cy="12" r="4"></circle>
+                            <path d="M12 2v3"></path>
+                            <path d="M12 19v3"></path>
+                            <path d="M2 12h3"></path>
+                            <path d="M19 12h3"></path>
+                            <path d="M4.9 4.9l2.1 2.1"></path>
+                            <path d="M17 17l2.1 2.1"></path>
+                            <path d="M4.9 19.1l2.1-2.1"></path>
+                            <path d="M17 7l2.1-2.1"></path>
+                        </svg>
                     </button>
-                </div>
+                </nav>
             </div>
         </div>
-    </nav>
+    </header>
 
     <!-- Hero Section -->
-    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="order-2 md:order-1">
-                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
-                    <span class="text-orange-500">David</span> Tonon
-                </h1>
-                <h2 class="text-2xl md:text-3xl font-semibold text-gray-300 mb-6">
-                    Building Africa through the power of technology
-                </h2>
-                <p class="text-lg text-gray-400 mb-8 max-w-lg">
-                    AI Engineer, Full-Stack Developer, and STEM enthusiast focused on innovation and entrepreneurship for Africa's tech transformation.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="#projects" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition duration-300">
-                        View Projects
-                    </a>
-                    <a href="#contact" class="border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-3 px-6 rounded-md transition duration-300">
-                        Contact Me
-                    </a>
-                </div>
+    <section style="padding: 4rem 0 2rem;" class="gradient-hero">
+        <div class="container">
+            <div class="label-sm hero-label fade-in" style="opacity: 0; transform: translateY(20px);">// researcher_on_void</div>
+            
+            <h1 style="margin-bottom: 0.5rem; line-height: 0.95; opacity: 0; transform: translateY(30px);">DAVID<br>TONON</h1>
+            
+            <p class="hero-subtitle fade-in" style="font-size: 1.1rem; color: #c6c6c7; margin-bottom: 1.5rem; max-width: 600px; font-weight: 400; opacity: 0; transform: translateY(20px);" data-i18n="hero_subtitle" data-i18n-html="true">
+                Building Solution through<br>technology
+            </p>
+            
+            <p class="body-lg hero-description fade-in" style="max-width: 700px; margin-bottom: 2rem; opacity: 0; transform: translateY(20px);" data-i18n="hero_description">
+                I architect systems that bridge complex computation and emerging markets. Specializing in autonomous systems, LLM integration, and distributed applications focused on solving real-world African challenges.
+            </p>
+            
+            <div class="hero-buttons fade-in" style="display: flex; gap: 1rem; margin-bottom: 4rem; opacity: 0; transform: translateY(20px);">
+                <button class="btn btn-primary" data-i18n="hero_cta_primary">VIEW_STACK</button>
+                <button class="btn btn-secondary" data-i18n="hero_cta_secondary">SET_IN_TOUCH</button>
             </div>
-            <div class="order-1 md:order-2 flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-orange-500 floating">
-                    <img src="profile.jpg" 
-                         alt="David Tonon" 
-                         class="w-full h-full object-cover">
+        </div>
+    </section>
+
+    <!-- Trusted By -->
+    <section class="trusted-section" style="padding: 2.5rem 0; border-top: 1px solid rgba(198, 198, 199, 0.1); border-bottom: 1px solid rgba(198, 198, 199, 0.1); opacity: 0; transform: translateY(20px);">
+        <div class="container">
+            <div class="label-sm" style="margin-bottom: 1rem;" data-i18n="trusted_label">// = trusted_by</div>
+            <div class="trusted-marquee blur-glass shadow-soft">
+                <div class="trusted-track">
+                    <a class="trusted-logo" href="https://breakin-demo.vercel.app/">Breakin Direct</a>
+                    <a class="trusted-logo" href="https://multichat-app.vercel.app/">Multichat</a>
+                    <a class="trusted-logo" href="https://then7xt.com/en/home/">The N7XT</a>
+                    <a class="trusted-logo" href="https://kedys-agency.vercel.app/">KEDYS Agency</a>
+                    <a class="trusted-logo" href="https://breakin-demo.vercel.app/">Breakin Direct</a>
+                    <a class="trusted-logo" href="https://multichat-app.vercel.app/">Multichat</a>
+                    <a class="trusted-logo" href="https://then7xt.com/en/home/">The N7XT</a>
+                    <a class="trusted-logo" href="https://kedys-agency.vercel.app/">KEDYS Agency</a>
+                    <a class="trusted-logo" href="https://breakin-demo.vercel.app/">Breakin Direct</a>
+                    <a class="trusted-logo" href="https://multichat-app.vercel.app/">Multichat</a>
+                    <a class="trusted-logo" href="https://then7xt.com/en/home/">The N7XT</a>
+                    <a class="trusted-logo" href="https://kedys-agency.vercel.app/">KEDYS Agency</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                <span class="text-orange-500">About</span> Me
-            </h2>
-            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="flex justify-center">
-                <div class="relative w-64 h-64 md:w-80 md:h-80 rounded-lg overflow-hidden border-2 border-orange-500">
-                    <img src="profile.jpg" alt="David Tonon" class="w-full h-full object-cover">
-                </div>
-            </div>
-            <div>
-                <h3 class="text-2xl font-semibold text-white mb-4">Biography</h3>
-                <p class="text-gray-400 mb-6">
-                    A passionate AI engineer, entrepreneur, and STEM student based in Benin. Dedicated to developing innovative tech solutions by combining AI, full-stack development, and UX/UI design.
-                </p>
-                <h3 class="text-2xl font-semibold text-white mb-4">Mission Statement</h3>
-                <p class="text-gray-400 mb-6">
-                    Committed to creating a thriving innovation hub in Africa by merging technology with vision. My goal is to build a tech ecosystem that surpasses Silicon Valley right here on the African continent.
-                </p>
-                <div class="flex space-x-4">
-                    <a href="David_Tonon_CV.pdf" class="bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 flex items-center">
-                        <ion-icon name="document-text-outline" class="mr-2"></ion-icon>
-                        Download CV
-                    </a>
-                </div>
-            </div>
+    <!-- Founder Mission -->
+    <section id="about" class="founder-section" style="padding: 4rem 0; border-top: 1px solid rgba(198, 198, 199, 0.1); border-bottom: 1px solid rgba(198, 198, 199, 0.1); opacity: 0; transform: translateY(30px);">
+        <div class="container">
+            <div class="label-sm" data-i18n="founder_label">// = founder_mission</div>
+            
+            <p class="body-lg" style="max-width: 800px; margin-bottom: 1.5rem;" data-i18n="founder_p1">
+                I architect systems that bridge complex computation and high-impact products.
+            </p>
+            
+            <p class="body-lg" style="max-width: 800px; margin-bottom: 2rem; color: #a0a0a0;" data-i18n="founder_p2">
+                Focus: Building resilient technology in emerging markets, specifically leveraging advanced architectures for the African digital infrastructure.
+            </p>
+            
+            <blockquote style="border-left: 2px solid rgba(0, 252, 64, 0.3); padding-left: 1.5rem; color: #a0a0a0; font-style: italic; font-size: 0.95rem; margin: 0;" data-i18n="founder_quote">
+                "Technology is the leverage. Africa is the focus. Systems and high-impact products are the vision for building resilient technology in the African digital infrastructure."
+            </blockquote>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-[#112240] rounded-lg">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                My <span class="text-orange-500">Skills</span>
-            </h2>
-            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Programming Languages -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="code-slash-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">Programming</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Python
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        JavaScript
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        C/C++
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        PHP
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Web Development -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="globe-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">Web Dev</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        HTML5/CSS3
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        React
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Django
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        FastAPI
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- AI/ML -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="hardware-chip-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">AI/ML</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Machine Learning
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Deep Learning
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        TensorFlow/PyTorch
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Computer Vision
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Databases -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="server-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">Databases</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        MongoDB
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        PostgreSQL
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        MySQL
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Firebase
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Tools -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="hammer-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">Tools</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Git/GitHub
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        VS Code
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Docker
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Jupyter
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- UX/UI -->
-            <div class="skill-card bg-[#0a192f] p-6 rounded-lg transition duration-300 hover:shadow-lg">
-                <div class="flex items-center mb-4">
-                    <ion-icon name="color-palette-outline" class="text-orange-500 text-2xl mr-3"></ion-icon>
-                    <h3 class="text-xl font-semibold text-white">UX/UI Design</h3>
-                </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Figma
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Adobe XD
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        User Research
-                    </li>
-                    <li class="flex items-center text-gray-400">
-                        <ion-icon name="checkmark-circle" class="text-orange-500 mr-2"></ion-icon>
-                        Prototyping
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    <!-- Projects -->
+    <section id="projects" style="padding: 4rem 0;">
+        <div class="container">
+            <div class="label-sm" data-i18n="projects_label">// = selected_projects</div>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                My <span class="text-orange-500">Projects</span>
-            </h2>
-            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Project 1 -->
-            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="mental.png" 
-                         alt="AI-Powered Healthcare Platform" 
-                         class="w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
-                        <div class="text-center p-4">
-                            <a href="https://mind-care-seven.vercel.app/" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
-                                View Project
-                            </a>
-                            <a href="https://github.com/david15tonon/MindCare/tree/main" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
-                                GitHub
-                            </a>
-                        </div>
+            <div class="grid-2" style="margin-bottom: 3rem;">
+                <div id="breakin-direct" class="card portfolio-card card-depth">
+                    <div class="card-meta">01 // BREAKIN DIRECT</div>
+                    <h3 class="card-title" data-i18n="project_breakin_title">Proof-of-work Hiring Platform</h3>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_breakin_p1">A recruitment platform that evaluates developers based on real-world work instead of resumes.</p>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_breakin_p2">Led full technical architecture and development across an international team, with scalable backend systems and evaluation pipelines.</p>
+                    <div style="margin-bottom: 0.75rem;">
+                        <span class="chip">FASTAPI</span>
+                        <span class="chip">MONGODB</span>
+                        <span class="chip">SUPABASE</span>
+                        <span class="chip">LANGCHAIN</span>
                     </div>
+                    <p style="color: #81ecff; font-size: 0.82rem; font-weight: 600;" data-i18n="project_breakin_award">Top 10 finalist - AI Hackathon (Lablab 2025)</p>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">AI-Powered Healthcare Platform</h3>
-                    <p class="text-gray-400 mb-4">
-                        MindCare is a mental health assistant
-It offers 24/7 emotional support using compassionate AI to listen and guide users.
-Designed to provide a safe, calming space for mental wellness.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Ollama</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">FastAPI</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 2 -->
-            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
-                         alt="AgriTech Solution for African Farmers" 
-                         class="w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
-                        <div class="text-center p-4">
-                            <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
-                                View Project
-                            </a>
-                            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">AgriTech Solution for African Farmers</h3>
-                    <p class="text-gray-400 mb-4">
-                        Mobile app that uses AI to predict crop yields and suggest optimal planting times based on weather data.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">React Native</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Django</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">MongoDB</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Project 3 -->
-            <div class="project-card bg-[#112240] rounded-lg overflow-hidden transition duration-300 hover:shadow-lg">
-                <div class="relative h-48 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" 
-                         alt="African Language Translation API" 
-                         class="w-full h-full object-cover">
-                    <div class="project-overlay absolute inset-0 bg-[#0a192f]/90 flex items-center justify-center opacity-0 transition duration-300">
-                        <div class="text-center p-4">
-                            <a href="#" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-medium py-2 px-4 rounded-md transition duration-300 mb-2">
-                                View Project
-                            </a>
-                            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-2 px-4 rounded-md transition duration-300">
-                                GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-semibold text-white mb-2">African Language Translation API</h3>
-                    <p class="text-gray-400 mb-4">
-                        NLP service that translates between English and several African languages with high accuracy.
-                    </p>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Python</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">PyTorch</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">FastAPI</span>
-                        <span class="text-xs bg-[#0a192f] text-orange-500 px-2 py-1 rounded">Docker</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-12">
-            <a href="#" class="inline-block border border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-medium py-3 px-6 rounded-md transition duration-300">
-                View All Projects
-            </a>
-        </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-[#112240] rounded-lg">
-        <div class="text-center mb-16">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                Get In <span class="text-orange-500">Touch</span>
-            </h2>
-            <div class="w-20 h-1 bg-orange-500 mx-auto"></div>
-        </div>
-        
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-                <h3 class="text-2xl font-semibold text-white mb-6">Contact Information</h3>
-                <p class="text-gray-400 mb-8">
-                    Interested in collaborating or learning more about my work? Feel free to reach out through any of the channels below.
-                </p>
-                
-                <div class="space-y-6">
-                    <div class="flex items-start">
-                        <ion-icon name="mail-outline" class="text-orange-500 text-xl mr-4 mt-1"></ion-icon>
-                        <div>
-                            <h4 class="text-white font-medium">Email</h4>
-                            <a href="mailto:contact@david-tonon.me" class="text-gray-400 hover:text-orange-500 transition duration-300">contact@david-tonon.me</a>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-start">
-                        <ion-icon name="location-outline" class="text-orange-500 text-xl mr-4 mt-1"></ion-icon>
-                        <div>
-                            <h4 class="text-white font-medium">Location</h4>
-                            <p class="text-gray-400">Benin, West Africa</p>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center space-x-6 mt-8">
-                        <a href="https://github.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                            <ion-icon name="logo-github" class="text-2xl"></ion-icon>
-                        </a>
-                        <a href="https://www.linkedin.com/in/d%C3%A9o-gracias-david-tonon-1ab4521b6/" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                            <ion-icon name="logo-linkedin" class="text-2xl"></ion-icon>
-                        </a>
-                        <a href="https://x.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                            <ion-icon name="logo-twitter" class="text-2xl"></ion-icon>
-                        </a>
-                        <a href="https://www.instagram.com/david.tonon15/" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                            <ion-icon name="logo-instagram" class="text-2xl"></ion-icon>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div>
-                <form class="space-y-6">
+                <div id="multichat" class="card portfolio-card card-depth">
+                    <div class="card-meta">02 // MULTICHAT</div>
+                    <h3 class="card-title" data-i18n="project_multichat_title">Real-time Multilingual Communication</h3>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_multichat_p1">Messaging platform enabling users to communicate in different languages with contextual real-time translation.</p>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_multichat_p2">Designed to preserve meaning, tone, and conversational context with low latency and seamless UX.</p>
                     <div>
-                        <label for="name" class="block text-white font-medium mb-2">Your Name</label>
-                        <input type="text" id="name" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="John Doe">
+                        <span class="chip">WEBSOCKETS</span>
+                        <span class="chip">TRANSLATION PIPELINES</span>
+                        <span class="chip">LOW LATENCY</span>
                     </div>
-                    
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div id="faceid-system" class="card code-card card-depth">
+                    <div class="card-meta">03 // FACEID SYSTEM</div>
+                    <h3 class="card-title" data-i18n="project_faceid_title">Real-time Identity Verification</h3>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_faceid_p1">Face recognition system for secure, real-time identity verification with sub-second performance.</p>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_faceid_p2">Secure authentication stack with bcrypt, encryption, and MFA-ready architecture for scalable API integration.</p>
                     <div>
-                        <label for="email" class="block text-white font-medium mb-2">Your Email</label>
-                        <input type="email" id="email" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="john@example.com">
+                        <span class="chip">REAL-TIME RECOGNITION</span>
+                        <span class="chip">SECURITY LAYER</span>
+                        <span class="chip">LOGGING & ANALYTICS</span>
                     </div>
-                    
+                </div>
+
+                <div id="benrover-24" class="card code-card card-depth">
+                    <div class="card-meta">04 // BENROVER-24</div>
+                    <h3 class="card-title" data-i18n="project_benrover_title">Robotics & Real-time Systems</h3>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_benrover_p1">Contributor on rover control interface using ROS and KivyMD for robust field operations.</p>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_benrover_p2">Focused on real-time control, ROS communication (nodes, topics, services), reliability, and data flow.</p>
                     <div>
-                        <label for="message" class="block text-white font-medium mb-2">Your Message</label>
-                        <textarea id="message" rows="5" class="w-full bg-[#0a192f] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent" placeholder="Hello David..."></textarea>
+                        <span class="chip">ROS</span>
+                        <span class="chip">KIVYMD</span>
+                        <span class="chip">REAL-TIME CONTROL</span>
                     </div>
-                    
-                    <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white font-medium py-3 px-6 rounded-md transition duration-300">
-                        Send Message
-                    </button>
-                </form>
+                </div>
+
+                <div id="kedys-agency" class="card code-card card-depth">
+                    <div class="card-meta">05 // KEDYS AGENCY</div>
+                    <h3 class="card-title" data-i18n="project_kedys_title">Digital Product Agency</h3>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_kedys_p1">360-degree digital agency focused on building and launching impactful products.</p>
+                    <p style="color: #a0a0a0; line-height: 1.6; margin-bottom: 0.75rem;" data-i18n="project_kedys_p2">Work spans strategy, development, and product scaling with focus on execution and measurable client impact.</p>
+                    <div>
+                        <span class="chip">STRATEGY</span>
+                        <span class="chip">DEVELOPMENT</span>
+                        <span class="chip">PRODUCT SCALING</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to Collaborate -->
+    <section class="contact-section" style="padding: 4rem 0; border-top: 1px solid rgba(198, 198, 199, 0.1); text-align: center; opacity: 0;">
+        <div class="container">
+            <h2 style="margin-bottom: 0.5rem;" data-i18n="contact_title_top">READY_TO_</h2>
+            <h2 style="color: #00fc40; margin-bottom: 2rem;" data-i18n="contact_title_bottom">COLLABORATE?</h2>
+            
+            <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                <a href="https://github.com/david15tonon" class="btn btn-secondary">GITHUB</a>
+                <a href="https://linkedin.com" class="btn btn-secondary">LINKEDIN</a>
+                <a href="https://daily.dev/dash15tonon" class="btn btn-secondary">DAILY.DEV</a>
+                <a href="mailto:contact@david-tonon.me" class="btn btn-secondary">EMAIL</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div class="flex flex-col items-center justify-center">
-            <a href="#home" class="text-2xl font-bold text-white mb-6">DT</a>
-            
-            <div class="flex space-x-6 mb-6">
-                <a href="https://github.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                    <ion-icon name="logo-github" class="text-xl"></ion-icon>
-                </a>
-                <a href="https://www.linkedin.com/in/d%C3%A9o-gracias-david-tonon-1ab4521b6/" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                    <ion-icon name="logo-linkedin" class="text-xl"></ion-icon>
-                </a>
-                <a href="https://x.com/david15tonon" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                    <ion-icon name="logo-twitter" class="text-xl"></ion-icon>
-                </a>
-                <a href="https://www.instagram.com/david.tonon15/" class="text-gray-400 hover:text-orange-500 transition duration-300">
-                    <ion-icon name="logo-instagram" class="text-xl"></ion-icon>
-                </a>
-            </div>
-            
-            <p class="text-gray-400 text-center">
-                © 2023 David Tonon. All rights reserved.
-                <br>
-                Building Africa through the power of technology.
-            </p>
+    <footer style="padding: 3rem 0; border-top: 1px solid rgba(198, 198, 199, 0.1); text-align: center; color: #808080; font-size: 0.85rem;">
+        <div class="container">
+            <p>© 2026 DAVID TONON | THE DIGITAL ARCHITECT</p>
+            <p style="margin-top: 0.5rem;" data-i18n="footer_tagline">Building Solution through technology</p>
         </div>
     </footer>
-    <!-- Script -->
-    <script src="script.js"></script>
 
-    
+    <script>
+        // Initialize GSAP plugins
+        gsap.registerPlugin(ScrollTrigger);
+
+        // ===== THEME + LANGUAGE TOGGLES =====
+        const themeToggle = document.querySelector('.theme-toggle');
+        const languageToggle = document.querySelector('.lang-toggle');
+        const THEME_STORAGE_KEY = 'dt-theme';
+        const LANGUAGE_STORAGE_KEY = 'dt-language';
+
+        const translations = {
+            en: {
+                page_title: 'David Tonon | The Digital Architect',
+                nav_about: 'ABOUT',
+                nav_projects: 'PROJECTS',
+                hero_subtitle: 'Building Solution through<br>technology',
+                hero_description: 'I architect systems that bridge complex computation and emerging markets. Specializing in autonomous systems, LLM integration, and distributed applications focused on solving real-world African challenges.',
+                hero_cta_primary: 'VIEW_STACK',
+                hero_cta_secondary: 'SET_IN_TOUCH',
+                trusted_label: '// = trusted_by',
+                founder_label: '// = founder_mission',
+                founder_p1: 'I architect systems that bridge complex computation and high-impact products.',
+                founder_p2: 'Focus: Building resilient technology in emerging markets, specifically leveraging advanced architectures for the African digital infrastructure.',
+                founder_quote: '"Technology is the leverage. Africa is the focus. Systems and high-impact products are the vision for building resilient technology in the African digital infrastructure."',
+                projects_label: '// = selected_projects',
+                project_breakin_title: 'Proof-of-work Hiring Platform',
+                project_breakin_p1: 'A recruitment platform that evaluates developers based on real-world work instead of resumes.',
+                project_breakin_p2: 'Led full technical architecture and development across an international team, with scalable backend systems and evaluation pipelines.',
+                project_breakin_award: 'Top 10 finalist - AI Hackathon (Lablab 2025)',
+                project_multichat_title: 'Real-time Multilingual Communication',
+                project_multichat_p1: 'Messaging platform enabling users to communicate in different languages with contextual real-time translation.',
+                project_multichat_p2: 'Designed to preserve meaning, tone, and conversational context with low latency and seamless UX.',
+                project_faceid_title: 'Real-time Identity Verification',
+                project_faceid_p1: 'Face recognition system for secure, real-time identity verification with sub-second performance.',
+                project_faceid_p2: 'Secure authentication stack with bcrypt, encryption, and MFA-ready architecture for scalable API integration.',
+                project_benrover_title: 'Robotics & Real-time Systems',
+                project_benrover_p1: 'Contributor on rover control interface using ROS and KivyMD for robust field operations.',
+                project_benrover_p2: 'Focused on real-time control, ROS communication (nodes, topics, services), reliability, and data flow.',
+                project_kedys_title: 'Digital Product Agency',
+                project_kedys_p1: '360-degree digital agency focused on building and launching impactful products.',
+                project_kedys_p2: 'Work spans strategy, development, and product scaling with focus on execution and measurable client impact.',
+                contact_title_top: 'READY_TO_',
+                contact_title_bottom: 'COLLABORATE?',
+                footer_tagline: 'Building Solution through technology'
+            },
+            fr: {
+                page_title: 'David Tonon | L\'Architecte Digital',
+                nav_about: 'A_PROPOS',
+                nav_projects: 'PROJETS',
+                hero_subtitle: 'Construire des solutions par<br>la technologie',
+                hero_description: 'Je concois des systemes qui relient calcul avance et marches emergents. Specialise en systemes autonomes, integration LLM et applications distribuees pour des problemes concrets en Afrique.',
+                hero_cta_primary: 'VOIR_STACK',
+                hero_cta_secondary: 'ME_CONTACTER',
+                trusted_label: '// = ils_me_font_confiance',
+                founder_label: '// = mission_fondatrice',
+                founder_p1: 'Je construis des systemes qui relient complexite technique et produits a fort impact.',
+                founder_p2: 'Focus : creer des technologies resilientes dans les marches emergents, en s\'appuyant sur des architectures avancees pour l\'infrastructure numerique africaine.',
+                founder_quote: '"La technologie est le levier. L\'Afrique est le cap. Les systemes et produits a fort impact sont la vision pour une infrastructure numerique africaine durable."',
+                projects_label: '// = projets_selectionnes',
+                project_breakin_title: 'Plateforme de recrutement proof-of-work',
+                project_breakin_p1: 'Une plateforme de recrutement qui evalue les developpeurs sur du travail reel plutot que sur un CV.',
+                project_breakin_p2: 'J\'ai pilote l\'architecture technique complete et le developpement au sein d\'une equipe internationale, avec des pipelines d\'evaluation scalables.',
+                project_breakin_award: 'Top 10 finaliste - AI Hackathon (Lablab 2025)',
+                project_multichat_title: 'Communication multilingue en temps reel',
+                project_multichat_p1: 'Plateforme de messagerie permettant de discuter en langues differentes avec traduction contextuelle en temps reel.',
+                project_multichat_p2: 'Concue pour preserver le sens, le ton et le contexte conversationnel, avec faible latence et UX fluide.',
+                project_faceid_title: 'Verification d\'identite en temps reel',
+                project_faceid_p1: 'Systeme de reconnaissance faciale pour une verification d\'identite securisee en temps reel, avec performances sous la seconde.',
+                project_faceid_p2: 'Pile d\'authentification securisee avec bcrypt, chiffrement et architecture prete pour la MFA, integrable via API.',
+                project_benrover_title: 'Robotique et systemes temps reel',
+                project_benrover_p1: 'Contribution a l\'interface de pilotage du rover avec ROS et KivyMD pour des operations robustes.',
+                project_benrover_p2: 'Travail centre sur le controle temps reel, la communication ROS (nodes, topics, services), la fiabilite et le flux de donnees.',
+                project_kedys_title: 'Agence de produits digitaux',
+                project_kedys_p1: 'Agence digitale 360-degree specialisee dans la creation et le lancement de produits a impact.',
+                project_kedys_p2: 'Interventions sur la strategie, le developpement et le passage a l\'echelle produit, avec focus execution et impact client.',
+                contact_title_top: 'PRET_A_',
+                contact_title_bottom: 'COLLABORER ?',
+                footer_tagline: 'Construire des solutions par la technologie'
+            }
+        };
+
+        function getThemeToggleLabel(isLight) {
+            const isFrench = document.documentElement.lang === 'fr';
+            if (isFrench) {
+                return isLight ? 'Passer en mode sombre' : 'Passer en mode clair';
+            }
+            return isLight ? 'Switch to dark mode' : 'Switch to light mode';
+        }
+
+        function applyLanguage(language) {
+            const resolvedLanguage = language === 'fr' ? 'fr' : 'en';
+            const dictionary = translations[resolvedLanguage];
+
+            document.documentElement.lang = resolvedLanguage;
+            document.title = dictionary.page_title;
+
+            document.querySelectorAll('[data-i18n]').forEach((element) => {
+                const key = element.getAttribute('data-i18n');
+                const value = dictionary[key];
+
+                if (typeof value !== 'string') {
+                    return;
+                }
+
+                if (element.getAttribute('data-i18n-html') === 'true') {
+                    element.innerHTML = value;
+                } else {
+                    element.textContent = value;
+                }
+            });
+
+            if (languageToggle) {
+                const nextLanguage = resolvedLanguage === 'fr' ? 'EN' : 'FR';
+                const langToggleLabel = resolvedLanguage === 'fr' ? 'Passer en anglais' : 'Switch to French';
+                languageToggle.textContent = nextLanguage;
+                languageToggle.setAttribute('aria-label', langToggleLabel);
+                languageToggle.setAttribute('title', langToggleLabel);
+            }
+
+            if (themeToggle) {
+                const isLight = document.body.classList.contains('light-mode');
+                const toggleLabel = getThemeToggleLabel(isLight);
+                themeToggle.setAttribute('aria-label', toggleLabel);
+                themeToggle.setAttribute('title', toggleLabel);
+            }
+        }
+
+        function applyTheme(theme) {
+            const isLight = theme === 'light';
+            document.body.classList.toggle('light-mode', isLight);
+
+            if (themeToggle) {
+                const toggleLabel = getThemeToggleLabel(isLight);
+                themeToggle.setAttribute('aria-label', toggleLabel);
+                themeToggle.setAttribute('title', toggleLabel);
+            }
+        }
+
+        const savedLanguage = localStorage.getItem(LANGUAGE_STORAGE_KEY) || 'fr';
+        applyLanguage(savedLanguage);
+
+        if (languageToggle) {
+            languageToggle.addEventListener('click', function() {
+                const nextLanguage = document.documentElement.lang === 'fr' ? 'en' : 'fr';
+                applyLanguage(nextLanguage);
+                localStorage.setItem(LANGUAGE_STORAGE_KEY, nextLanguage);
+            });
+        }
+
+        const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        applyTheme(savedTheme || (prefersLight ? 'light' : 'dark'));
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                const nextTheme = document.body.classList.contains('light-mode') ? 'dark' : 'light';
+                applyTheme(nextTheme);
+                localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+            });
+        }
+        
+        // ===== HERO ANIMATIONS =====
+        const heroTimeline = gsap.timeline();
+        
+        // Hero label fade + slide up
+        heroTimeline.to('.hero-label', {
+            duration: 0.8,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out'
+        }, 0);
+        
+        // Hero heading fade + slide up (staggered)
+        heroTimeline.to('h1', {
+            duration: 1,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out'
+        }, 0.1);
+        
+        // Hero subtitle fade + slide up
+        heroTimeline.to('.hero-subtitle', {
+            duration: 0.9,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out'
+        }, 0.2);
+        
+        // Hero description fade + slide up
+        heroTimeline.to('.hero-description', {
+            duration: 0.9,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out'
+        }, 0.3);
+        
+        // Hero buttons fade in
+        heroTimeline.to('.hero-buttons', {
+            duration: 0.8,
+            y: 0,
+            opacity: 1,
+            ease: 'power3.out'
+        }, 0.4);
+
+        // Trusted by section reveal
+        const trustedSection = document.querySelector('.trusted-section');
+        if (trustedSection) {
+            gsap.to(trustedSection, {
+                scrollTrigger: {
+                    trigger: trustedSection,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 0.8,
+                opacity: 1,
+                y: 0,
+                ease: 'power3.out'
+            });
+        }
+        
+        // ===== SECTION REVEAL ANIMATIONS =====
+        // Founder Mission section
+        gsap.to('.founder-section', {
+            scrollTrigger: {
+                trigger: '.founder-section',
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 0.8,
+            opacity: 1,
+            y: 0,
+            ease: 'power3.out'
+        });
+        
+        // Portfolio cards animations
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        portfolioCards.forEach((card, index) => {
+            gsap.set(card, { y: 30, opacity: 0 });
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 0.7,
+                y: 0,
+                opacity: 1,
+                ease: 'power3.out',
+                delay: index * 0.15
+            });
+        });
+        
+        // Code builds cards with depth
+        const codeCards = document.querySelectorAll('.code-card');
+        codeCards.forEach((card, index) => {
+            gsap.set(card, { y: 40, opacity: 0 });
+            gsap.to(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 80%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 0.8,
+                y: 0,
+                opacity: 1,
+                ease: 'back.out(1.2)',
+                delay: index * 0.1
+            });
+        });
+        
+        // ===== PARALLAX EFFECT =====
+        gsap.utils.toArray('.parallax-item').forEach(element => {
+            gsap.to(element, {
+                scrollTrigger: {
+                    trigger: element,
+                    start: 'top center',
+                    scrub: 1,
+                    markers: false
+                },
+                y: -50,
+                ease: 'none'
+            });
+        });
+        
+        // ===== CONTACT SECTION ANIMATION =====
+        const contactSection = document.querySelector('.contact-section');
+        if (contactSection) {
+            gsap.set(contactSection, { opacity: 0 });
+            gsap.to(contactSection, {
+                scrollTrigger: {
+                    trigger: contactSection,
+                    start: 'top 75%',
+                    toggleActions: 'play none none reverse'
+                },
+                duration: 1,
+                opacity: 1,
+                ease: 'power3.out'
+            });
+        }
+        
+        // ===== BUTTON HOVER ANIMATIONS =====
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                gsap.to(this, {
+                    duration: 0.3,
+                    scale: 1.05,
+                    ease: 'power2.out'
+                });
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                gsap.to(this, {
+                    duration: 0.3,
+                    scale: 1,
+                    ease: 'power2.out'
+                });
+            });
+        });
+        
+        // ===== FLOATING GLOW EFFECT =====
+        gsap.to('.glow-element', {
+            duration: 4,
+            boxShadow: '0 0 80px rgba(0, 252, 64, 0.3), 0 0 120px rgba(129, 236, 255, 0.1)',
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut'
+        });
+        
+        // ===== LOGO DT ANIMATION =====
+        const logoDT = document.querySelector('.logo-dt');
+        const logoLetters = document.querySelectorAll('.logo-letter');
+        
+        // Animation d'écriture au chargement
+        gsap.fromTo(logoLetters, 
+            {
+                opacity: 0,
+                y: 10,
+                scale: 0.8
+            },
+            {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                stagger: 0.2,
+                ease: 'back.out(1.5)',
+                delay: 0.3
+            }
+        );
+        
+        // Breathing glow effect (après l'animation d'écriture)
+        gsap.to(logoDT, {
+            duration: 3,
+            textShadow: '0 0 40px rgba(0, 252, 64, 0.5)',
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 1.5
+        });
+        
+        // Hover interaction
+        logoDT.addEventListener('mouseenter', function() {
+            gsap.to(this, {
+                duration: 0.4,
+                scale: 1.2,
+                color: '#00fc40',
+                textShadow: '0 0 60px rgba(0, 252, 64, 0.8), 0 0 100px rgba(129, 236, 255, 0.3)',
+                ease: 'back.out(1.5)'
+            });
+        });
+        
+        logoDT.addEventListener('mouseleave', function() {
+            const lightMode = document.body.classList.contains('light-mode');
+            gsap.to(this, {
+                duration: 0.4,
+                scale: 1,
+                color: lightMode ? '#111823' : '#ffffff',
+                textShadow: lightMode ? '0 0 20px rgba(12, 148, 66, 0.2)' : '0 0 20px rgba(0, 252, 64, 0.3)',
+                ease: 'power2.out'
+            });
+        });
+    </script>
+
 </body>
 </html>
